@@ -8,3 +8,4 @@ class User(db.Model):
     email = db.Column(db.String(50))
     password = db.Column(db.String(200))
     phone = db.Column(db.String(50))
+    project = db.relationship("Project", back_populates="users")

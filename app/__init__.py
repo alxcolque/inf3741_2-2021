@@ -11,7 +11,7 @@ app = Flask(__name__, template_folder="views")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 #Conexion con la base de datos
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root@localhost/dbpython"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root@localhost/dbpy"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 
 
