@@ -2,31 +2,8 @@
 
 <!-- Inicio bloque body -->
 {% block body %}
-<div class="container">
-    <h1 class="mt-5">Usuario</h1>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
-            <th scope="col">Usuario</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for row in users %}
-            <tr>
-                <td>{{row.id}}</td>
-                <td>{{row.name}}</td>
-                <td>{{row.email}}</td>
-                <td>{{row.username}}</td>
-                
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
 
-</div>
+<h1>Bienvenido a mi sitio web</h1>
 
 {% endblock %}
 <!-- Fin bloque body -->

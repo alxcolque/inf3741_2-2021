@@ -1,0 +1,173 @@
+{% extends 'layouts/app.html' %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Hey!</strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endfor%}
+{% endif %}
+{% endwith%}
+
+
+<section class="vh-100" style="background-color: #e9d9dc;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/img1.jpg"
+                                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+
+                                <form action="register" method="POST">
+
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <i class="fa fa-user fa-2x me-3" style="color: #ff6219;"></i>
+                                        <span class="h1 fw-bold mb-0">Logo</span>
+                                    </div>
+
+                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Registrarse</h5>
+                                    <div class="form-outline mb-4">
+                                        <input type="text" name="nombre" id="form2Example17"
+                                            class="form-control form-control-lg" />
+                                        <label class="form-label" for="form2Example17">Nombre</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input type="email" name="email" id="form2Example17"
+                                            class="form-control form-control-lg" required onkeyup="return forceLower(this);">
+                                        <label class="form-label" for="form2Example17">Email address</label>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="password">Password</label>
+                                        <input type="password" name="password" class="form-control"
+                                            id="password" placeholder="Password">
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="confirm_password">Confirm Password</label>
+                                        <input type="password" name="confirm_password" class="form-control"
+                                            id="confirm_password" placeholder="Confirm password">
+                                        <span id='message'></span>
+                                    </div>
+
+
+                                    <!-- Solo letras -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" name="sololetras" class="form-control"
+                                            id="sololetras" placeholder="Solo letras">
+                                    </div>
+                                    <!-- Solo numeros -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" name="solonumeros" class="form-control"
+                                            id="solonumeros" placeholder="Solo numeros">
+                                    </div>
+                                    <!-- Solo letras -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" name="gps" class="form-control"
+                                            id="gps" placeholder="gps">
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Registrar</button>
+                                    </div>
+
+                                    <a class="small text-muted" href="#!">Forgot password?</a>
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!"
+                                            style="color: #393f81;">Register here</a></p>
+                                    <a href="#!" class="small text-muted">Terms of use.</a>
+                                    <a href="#!" class="small text-muted">Privacy policy</a>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+<!-- Estilos CSS -->
+{% block css%}
+<style>
+
+</style>
+{% endblock %}
+<!-- Java Scripts -->
+{% block js%}
+<script>
+    function forceLower(strInput) {
+        strInput.value = strInput.value.toLowerCase();
+    }
+
+    // Restricts input for the given textbox to the given inputFilter.
+    function setInputFilter(textbox, inputFilter) {
+        ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+            textbox.addEventListener(event, function() {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        });
+    }
+    //Solo acepta El abecedario 
+    setInputFilter(document.getElementById("sololetras"), function(value) {
+        return /^[a-z]*$/i.test(value);
+    });
+
+    //Edad validacion
+    setInputFilter(document.getElementById("solonumeros"), function(value) {
+        return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 2000);
+    });
+    //Solo acepta coordenadas
+    setInputFilter(document.getElementById("gps"), function(value) {
+        return /^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$/i.test(value);
+    });
+
+
+</script>
+<script>
+    //validar password
+    $('#password, #confirm_password').on('keyup', function() {
+        if ($('#password').val() == '') {
+            $('#message').html('Sin datos').css('color', 'white');
+            $('#confirm_password').css("border-color", "red");
+        } else if ($('#confirm_password').val() == $('input[name="password"]').val() && $('#confirm_password').val().length > 5) {
+            //$('#confirm_password').css( 'border-color','green');
+
+            //$('#confirm_password').css("border-color", "green");
+            //element.classList.remove("borderRed");
+            var element = document.getElementById('confirm_password');
+            // element.style.removeAttribute("border");
+            element.style.border = "";
+            var element = document.getElementById('confirm_password');
+            element.style.border = "2px solid green";
+
+            $('#message').html('Correcto').css('color', 'green');
+
+        } else {
+            $('#message').html('Las contraseñas no coinciden o es menor a 5 caracteres').css('color', 'red');
+            $('#confirm_password').css("border-color", "red");
+        }
+
+    });
+</script>
+
+{% endblock %}
