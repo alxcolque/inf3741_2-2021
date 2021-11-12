@@ -5,9 +5,9 @@ class CategoryController():
     def __init__(self):
         pass
 
-    def index1(self):
+    def index(self):
         categories = Category.query.all()
-        return render_template('categories/index.html',categories=categories)
+        return render_template('categories/index.html', categories=categories)
     def create(self):
         return render_template('categories/create.html')
     def store(self):
